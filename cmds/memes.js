@@ -1,6 +1,7 @@
 const MAX_MEME_NAME = 30
 
 let Meme = require("../schemas/meme.js")
+let snekfetch = require("snekfetch")
 
 let RI_TABLE = {
   0: "zero",
@@ -224,9 +225,84 @@ async function searchMemeCmd(ctx) {
   await ctx.send(memes.join(","), {code: true})
 }
 
+// TODO: Setup fullwidth
+async function fullwidth(ctx) {
+  await ctx.send("Not implemented")
+}
+
+async function ri(ctx) {
+  let text = ctx.args.join(" ")
+  if(!text) return await ctx.send("lul")
+  let chars = text.split("").map(function(char) {
+    let ri = RI_TABLE[char]
+    if(!ri) return char
+    return `:${ri}:`
+  })
+ 
+  if(chars.length == 1) await ctx.send(chars[0] + "\u200b")
+  else await ctx.send(chars.join("\u200b"))
+}
+
+async function pupper(ctx) {
+  await ctx.send("http://i.imgur.com/9Le8rW7.jpg :sob:")
+}
+
+async function br(ctx) {
+  await ctx.send("br?")
+}
+
+async function urban(ctx) {
+  // TODO: Add coins
+  // await coins.pricing(ctx, config.prices.API)
+  let query = ctx.args.join(" ")
+  
+  let res = await snekfetch.get(`https://api.urbandictionary.com/v0/define?term=${encodeURI(query)}`)
+  if(!res.body.list) return await ctx.send("No results found")
+  await ctx.send(`'${query}':
+${res.body.list[0].definition}`, {code: true})
+}
+
+async function ejaculate(ctx) {
+  await ctx.send("https://www.youtube.com/watch?v=S6UqgjaBt4w")
+}
+
+async function eightball(ctx) {
+  let choices = [
+     'Yes',
+    'No',
+    'Maybe',
+    'Potentially',
+    'Answer hazy',
+    'Only in your dreams',
+    'Ask later',
+  ]
+  let choice = choices[Math.floor(Math.random() * choices.length)]
+  await ctx.send(`**${ctx.author.username}**, :8ball: said ${choice}.`)
+}
+
 module.exports.commands = [
   {
     trigger: "m",
     call: meme
+  },
+  {
+    trigger: "ri",
+    call: ri
+  },
+  {
+    trigger: "pupper",
+    call: pupper
+  },
+  {
+    trigger: "8ball",
+    call: eightball
+  },
+  {
+    trigger: "urban",
+    call: urban
+  },
+  {
+    trigger: "ejaculate",
+    call: ejaculate
   }
 ]
