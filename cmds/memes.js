@@ -170,7 +170,7 @@ async function ownerMemeCmd(ctx) {
 async function topMemeCmd(ctx) {
   let memes = await Meme.find({})
   memes = memes.sort(function(meme1, meme2) {
-    return meme1.uses - meme2.uses
+    return meme2.uses - meme1.uses
   }).slice(0,14)
 
   await ctx.send(memes.map(function(meme, i) {
