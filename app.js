@@ -1,3 +1,4 @@
+require("mongoose-long")(require("mongoose"));
 let Discord = require("discord.js")
 let bot = new Discord.Client()
 let config = require("./config.json")

@@ -84,6 +84,28 @@ async function feedback(ctx) {
   await ctx.ok()
 }
 
+// TODO: Add clist
+async function clist(ctx) {
+  await ctx.send("Not implemented")
+}
+
+async function invite(ctx) {
+  let embed = {
+    title: "Invite Stuff",
+    fields: [
+      {
+        name: "OAuth URL",
+        value: await ctx.bot.generateInvite(37080128)
+      },
+      {
+        name: "Support Server",
+        value: cfg.supportServerInvite || "Not configured"
+      }
+    ]
+  }
+  await ctx.send("", {embed: embed})
+}
+
 module.exports.commands = [
   {
     trigger: "ping",
@@ -104,5 +126,13 @@ module.exports.commands = [
   {
     trigger: "uptime",
     call: uptime
+  },
+  {
+    trigger: "clist",
+    call: clist
+  },
+  {
+    trigger: "invite",
+    call: invite
   }
 ]

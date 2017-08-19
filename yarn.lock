@@ -101,6 +101,10 @@ mongodb@2.2.31:
     mongodb-core "2.1.15"
     readable-stream "2.2.7"
 
+mongoose-long@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/mongoose-long/-/mongoose-long-0.1.1.tgz#cc32e05b0cf50c85e25a19359d43a936fe9505a3"
+
 mongoose@^4.11.7:
   version "4.11.7"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.11.7.tgz#39e6f60880146eadf2efc37257e628fad9ceed8d"

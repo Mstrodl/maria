@@ -57,7 +57,8 @@ async function messageHandler(msg) {
     me: msg.guild ? msg.guild.me : msg.client.user,
     getMessage: msg.channel.getMessage,
     pins: msg.channel.pins,
-    prefix: prefix
+    prefix: prefix,
+    bot: msg.client
   }
 
   if(!msg.content.startsWith(prefix)) return // No command matched since not right prefix
